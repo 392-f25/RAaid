@@ -14,7 +14,6 @@ export const ResidentForm = ({ resident, onSave, onCancel }: ResidentFormProps) 
     preferredChannel: 'email',
     email: '',
     phone: '',
-    groupme: '',
   });
 
   useEffect(() => {
@@ -25,7 +24,6 @@ export const ResidentForm = ({ resident, onSave, onCancel }: ResidentFormProps) 
         preferredChannel: resident.preferredChannel,
         email: resident.email,
         phone: resident.phone,
-        groupme: resident.groupme,
       });
     } else {
       setFormData({
@@ -34,7 +32,6 @@ export const ResidentForm = ({ resident, onSave, onCancel }: ResidentFormProps) 
         preferredChannel: 'email',
         email: '',
         phone: '',
-        groupme: '',
       });
     }
   }, [resident]);
@@ -127,19 +124,6 @@ export const ResidentForm = ({ resident, onSave, onCancel }: ResidentFormProps) 
               id="phone"
               name="phone"
               value={formData.phone === null ? "" : formData.phone}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="groupme" className="block text-sm font-medium text-gray-700">
-              GroupMe
-            </label>
-            <input
-              type="text"
-              id="groupme"
-              name="groupme"
-              value={formData.groupme === null ? "" : formData.groupme}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />

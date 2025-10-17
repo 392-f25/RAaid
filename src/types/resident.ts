@@ -7,7 +7,6 @@ export interface Resident {
   preferredChannel: Channel;
   email: string | null;
   phone: string | null;
-  groupme: string | null;
 }
 
 export interface SendResult {

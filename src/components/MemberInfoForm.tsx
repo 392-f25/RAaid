@@ -8,7 +8,6 @@ interface MemberFormData {
   room: string;
   preferredChannel: 'email' | 'groupme';
   email: string;
-  groupme: string;
 }
 
 export const MemberInfoForm = () => {
@@ -17,7 +16,6 @@ export const MemberInfoForm = () => {
     room: '',
     preferredChannel: 'email',
     email: '',
-    groupme: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -41,7 +39,6 @@ export const MemberInfoForm = () => {
         preferredChannel: formData.preferredChannel,
         email: formData.email || null,
         phone: null, // Not collected in member form
-        groupme: formData.groupme || null,
       });
 
       console.log('Member info saved to Firebase successfully!');
@@ -54,7 +51,6 @@ export const MemberInfoForm = () => {
           room: '',
           preferredChannel: 'email',
           email: '',
-          groupme: '',
         });
         setSubmitted(false);
       }, 3000);
