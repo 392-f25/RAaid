@@ -72,6 +72,12 @@ export function AdminPage() {
     return () => clearTimeout(timer);
   }, [message]);
 
+  useEffect(() => {
+    if (!sendResults) return;
+    if (!message.trim()) return;
+    setSendResults(null);
+  }, [message, sendResults]);
+
   const handleSend = async () => {
     setError(null);
     setSendResults(null);
@@ -165,13 +171,6 @@ export function AdminPage() {
 
     // Clear draft and message after send
     setMessage('');
-    clearDraft();
-  };
-
-  const handleNewMessage = () => {
-    setMessage('');
-    setSendResults(null);
-    setError(null);
     clearDraft();
   };
 
@@ -302,9 +301,7 @@ export function AdminPage() {
                 <div className="flex space-x-3">
                   <SendButton
                     isSending={isSending}
-                    showNewMessage={!!sendResults}
                     onSend={handleSend}
-                    onNewMessage={handleNewMessage}
                   />
                 </div>
               </div>
