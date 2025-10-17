@@ -27,6 +27,7 @@ export function AdminPage() {
   const [selectedResidentIds, setSelectedResidentIds] = useState<Set<string>>(new Set());
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingResident, setEditingResident] = useState<Resident | null>(null);
+  const [activeMobileTab, setActiveMobileTab] = useState<'broadcast' | 'residents'>('broadcast');
 
   // Fetch residents from Firebase
   useEffect(() => {
@@ -250,39 +251,82 @@ export function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
         <Header raName={residentsData.ra.name} residentCount={residents.length} />
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Broadcast Message</h2>
+        <div className="mt-6 md:mt-8">
+          <div className="md:hidden mb-4 flex rounded-lg border border-gray-200 bg-white p-1 shadow-sm">
+            <button
+              type="button"
+              onClick={() => setActiveMobileTab('broadcast')}
+              aria-pressed={activeMobileTab === 'broadcast'}
+              className={`flex-1 rounded-md px-4 py-2 text-sm font-semibold ${
+                activeMobileTab === 'broadcast'
+                  ? 'bg-blue-600 text-white shadow'
+                  : 'text-gray-600'
+              }`}
+            >
+              Broadcast
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveMobileTab('residents')}
+              aria-pressed={activeMobileTab === 'residents'}
+              className={`flex-1 rounded-md px-4 py-2 text-sm font-semibold ${
+                activeMobileTab === 'residents'
+                  ? 'bg-blue-600 text-white shadow'
+                  : 'text-gray-600'
+              }`}
+            >
+              Residents
+            </button>
+          </div>
 
-          <MessageInput value={message} onChange={setMessage} disabled={isSending} />
+          <div className="md:grid md:grid-cols-2 md:gap-6">
+            <div
+              className={`${
+                activeMobileTab === 'broadcast' ? 'block' : 'hidden'
+              } md:block`}
+            >
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Broadcast Message</h2>
 
-          {/* Channel selection removed: now messages are sent only to each resident's preferred channel with fallback */}
+                <MessageInput value={message} onChange={setMessage} disabled={isSending} />
 
-          {error && <ErrorMessage message={error} />}
+                {/* Channel selection removed: now messages are sent only to each resident's preferred channel with fallback */}
 
-          {sendResults && <SuccessResults results={sendResults} />}
+                {error && <ErrorMessage message={error} />}
 
-          <div className="flex space-x-3">
-            <SendButton
-              isSending={isSending}
-              showNewMessage={!!sendResults}
-              onSend={handleSend}
-              onNewMessage={handleNewMessage}
-            />
+                {sendResults && <SuccessResults results={sendResults} />}
+
+                <div className="flex space-x-3">
+                  <SendButton
+                    isSending={isSending}
+                    showNewMessage={!!sendResults}
+                    onSend={handleSend}
+                    onNewMessage={handleNewMessage}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={`${
+                activeMobileTab === 'residents' ? 'block' : 'hidden'
+              } md:block`}
+            >
+              <ResidentsList
+                residents={residents}
+                selectedResidentIds={selectedResidentIds}
+                onToggleResident={handleToggleResident}
+                onToggleAll={handleToggleAllResidents}
+                onAdd={handleAddResident}
+                onEdit={handleEditResident}
+                onDelete={handleDeleteResident}
+              />
+            </div>
           </div>
         </div>
-
-        <ResidentsList
-          residents={residents}
-          selectedResidentIds={selectedResidentIds}
-          onToggleResident={handleToggleResident}
-          onToggleAll={handleToggleAllResidents}
-          onAdd={handleAddResident}
-          onEdit={handleEditResident}
-          onDelete={handleDeleteResident}
-        />
 
         {isFormOpen && (
           <ResidentForm

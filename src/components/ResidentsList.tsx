@@ -21,7 +21,7 @@ export const ResidentsList = ({
 }: ResidentsListProps) => {
   const allSelected = residents.length > 0 && selectedResidentIds.size === residents.length;
   return (
-    <div className="mt-8 bg-white rounded-lg shadow-md p-6">
+    <div className="mt-8 md:mt-0 bg-white rounded-lg shadow-md p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-gray-800">Residents</h2>
         <button
