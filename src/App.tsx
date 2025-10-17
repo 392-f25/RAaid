@@ -108,6 +108,7 @@ function App() {
               recipients: params.recipients
             });
           } else if (params.channel === 'groupme') {
+            console.log("sendingGroupme");
             success = await sendGroupMe({
               message: params.message,
               recipients: params.recipients

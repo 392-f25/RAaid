@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Alice",
+    "email": "alice@gmail.com",
+    "sms": null,
+    "groupme": null,
+    "preferred": "email"
+  },
+  {
+    "name": "Bob",
+    "email": null,
+    "sms": "801-123-4567",
+    "groupme": null,
+    "preferred": "sms"
+  },
+  {
+    "name": "Cathy",
+    "email": "cathy@gmail.com",
+    "sms": null,
+    "groupme": null,
+    "preferred": "email"
+  },
+  {
+    "name": "Dave",
+    "email": null,
+    "sms": null,
+    "groupme": "@Dave123",
+    "preferred": "groupme"
+  }
+]
