@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import type { PropsWithChildren } from 'react';
+import { useState, useEffect } from 'react';
 
 const DRAFT_KEY = 'raid-message-draft';
 
-const MessageDraft = (props: PropsWithChildren<{}>) => {
+const MessageDraft = () => {
   const [message, setMessage] = useState('');
   const [saved, setSaved] = useState(false);
 

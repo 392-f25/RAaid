@@ -16,9 +16,9 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.13",
-    "firebase": "^12.4.0",
     "axios": "^1.12.2",
     "emailjs": "^4.0.3",
+    "firebase": "^12.4.0",
     "node-groupme": "^4.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
