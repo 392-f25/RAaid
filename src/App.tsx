@@ -12,6 +12,7 @@ import { sendEmail } from './utilities/sendEmail';
 import { sendGroupMe } from './utilities/sendGroupMe';
 import { sendSMS } from './utilities/sendSMS';
 import { ResidentForm } from './components/ResidentForm';
+import TestWrite from './utilities/testWrite';
 
 // TODO: Add email and groupme features, as well as login tools for personalization
 
@@ -220,6 +221,7 @@ function App() {
               onSend={handleSend}
               onNewMessage={handleNewMessage}
             />
+            <TestWrite />
           </div>
         </div>
 
