@@ -1,4 +1,42 @@
+import type { SVGProps } from 'react';
 import type { Resident } from '../types/resident';
+
+const PencilIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="m15.232 5.232 3.536 3.536" />
+    <path d="M16.5 3.964a2.121 2.121 0 0 1 3 3L7.5 18.964 3 20.5l1.536-4.5Z" />
+  </svg>
+);
+
+const TrashIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M3 6h18" />
+    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    <path d="M10 11v6" />
+    <path d="M14 11v6" />
+  </svg>
+);
 
 type ResidentsListProps = {
   residents: Resident[];
@@ -52,9 +90,6 @@ export const ResidentsList = ({
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Contact
               </th>
-              <th scope="col" className="relative px-6 py-3">
-                <span className="sr-only">Edit</span>
-              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -69,7 +104,27 @@ export const ResidentsList = ({
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {resident.name}
+                  <div className="flex items-center space-x-3">
+                    <div className="inline-flex items-center space-x-2">
+                      <button
+                        type="button"
+                        onClick={() => onEdit(resident)}
+                        className="text-gray-500 hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-full p-1 transition"
+                        aria-label={`Edit ${resident.name}`}
+                      >
+                        <PencilIcon />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onDelete(resident.id)}
+                        className="text-gray-500 hover:text-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded-full p-1 transition"
+                        aria-label={`Delete ${resident.name}`}
+                      >
+                        <TrashIcon />
+                      </button>
+                    </div>
+                    <span>{resident.name}</span>
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                   {resident.room}
@@ -120,20 +175,6 @@ export const ResidentsList = ({
                       </span>
                     );
                   })()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                  <button
-                    onClick={() => onEdit(resident)}
-                    className="text-indigo-600 hover:text-indigo-900"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => onDelete(resident.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
                 </td>
               </tr>
             ))}
